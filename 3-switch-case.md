@@ -1,0 +1,140 @@
+
+## ✅ 1. switch-case 是什么？
+
+`switch-case` 是一种**多分支选择结构**，当一个变量（或表达式）的值可能有多种情况时，用它会比 `if-else` 更清晰。
+
+---
+
+## ✅ 2. 基本语法
+
+```c
+switch (表达式) {
+    case 常量1:
+        // 当表达式 == 常量1 时执行
+        语句;
+        break;
+
+    case 常量2:
+        // 当表达式 == 常量2 时执行
+        语句;
+        break;
+
+    ...
+
+    default:
+        // 以上所有都不满足时执行（可以省略）
+        语句;
+        break;
+}
+```
+
+---
+
+## ✅ 3. 工作流程
+
+1. 计算 `switch (表达式)` 的值
+2. 找到与 `case 常量` 相等的分支
+3. 执行该分支下面的代码
+4. 遇到 `break` 就跳出整个 `switch`
+5. 如果所有 case 都不满足，就执行 `default`（如果有）
+
+---
+
+## ✅ 4. 具体例子
+
+```c
+#include <stdio.h>
+
+int main() {
+    int day = 3;
+
+    switch (day) {
+        case 1:
+            printf("Monday\n");
+            break;
+        case 2:
+            printf("Tuesday\n");
+            break;
+        case 3:
+            printf("Wednesday\n");
+            break;
+        case 4:
+            printf("Thursday\n");
+            break;
+        case 5:
+            printf("Friday\n");
+            break;
+        default:
+            printf("Weekend\n");
+            break;
+    }
+
+    return 0;
+}
+```
+
+输出：
+
+```
+Wednesday
+```
+
+---
+
+## ✅ 5. 为什么要写 `break`？
+
+* 如果你忘了写 `break`，程序不会停在这个 case，而会**继续执行下面的 case**，这叫**“case 穿透（fall-through）”**
+
+例子：
+
+```c
+int x = 2;
+switch (x) {
+    case 1:
+        printf("One\n");
+    case 2:
+        printf("Two\n");
+    case 3:
+        printf("Three\n");
+}
+```
+
+输出：
+
+```
+Two
+Three
+```
+
+因为 `case 2` 后面没有 `break`，所以执行完继续往下。
+
+---
+
+## ✅ 6. default 是干嘛的？
+
+* 相当于 `else`，表示**以上情况都不满足时执行**
+* 不是必须写，但写了更安全
+
+---
+
+## ✅ 7. switch 和 if 的区别
+
+| 对比项    | switch-case        | if-else         |
+| ------ | ------------------ | --------------- |
+| 判断方式   | 只能判断等于（==）关系       | 可以判断范围、大小、不等关系等 |
+| 条件类型   | 只能是整数/字符（int、char） | 任意逻辑表达式都可以      |
+| 结构清晰   | 更清楚、适合多选一          | 判断复杂或条件较多时显得冗长  |
+| 是否可以省略 | break 可以省略（会穿透）    | 没有穿透现象          |
+
+---
+
+## ✅ 8. 小结背一下！
+
+* `switch` 只能对一个表达式做判断
+* `case` 后必须是**常量**（不能是变量或范围）
+* 每个 `case` 后最好写 `break`
+* `default` 类似 `else`，可写可不写
+* 不适用于判断区间（如 `x > 5`）
+
+---
+
